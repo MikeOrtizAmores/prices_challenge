@@ -22,7 +22,7 @@
             <list />
           </option>
           <option name="resolveToWorkspace" value="false" />
-          <option name="workingDirPath" value="$PROJECT_DIR$/prices-challenge" />
+          <option name="workingDirPath" value="$PROJECT_DIR$/prices" />
         </MavenRunnerParameters>
       </option>
     </MavenSettings>
