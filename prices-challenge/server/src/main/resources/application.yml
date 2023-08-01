@@ -5,10 +5,11 @@ spring:
     url: r2dbc:h2:mem:///testdb
     username: sa
     password: password
-  jackson.default-property-inclusion: NON_NULL
   h2:
     console:
       enabled: true
       path: /h2-console
       settings.trace: false
       settings.web-allow-others: false
+springdoc:
+  packages-to-scan: com.ortizmiguelangel.api

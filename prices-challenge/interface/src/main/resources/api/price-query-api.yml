@@ -1,0 +1,115 @@
+---
+openapi: '3.0.3'
+servers:
+  - url: /v1/
+info:
+  title: Prices API
+  version: 1.0.0
+  description: Prices API challenge
+tags:
+  - name: price-query
+    description: To query everything related to the product price
+paths:
+  /price/product/{productId}:
+    get:
+      operationId: findPrice
+      summary: Finds a product price in a concrete date
+      tags:
+        - price-query
+      parameters:
+        - $ref: '#/components/parameters/ProductId'
+        - $ref: '#/components/parameters/BrandId'
+        - $ref: '#/components/parameters/Date'
+      responses:
+        200:
+          description: Price found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+        404:
+          description: Price not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+security:
+  - BasicAuth: [ ]
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+  parameters:
+    ProductId:
+      name: productId
+      in: path
+      required: true
+      description: Identifier of the product
+      schema:
+        type: integer
+        format: int64
+        minimum: 1
+    BrandId:
+      name: brandId
+      in: query
+      required: false
+      description: Identifier of the brand
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        default: 1
+    Date:
+      name: date
+      in: query
+      required: true
+      description: Date of the product price we are searching for
+      schema:
+        type: string
+        format: date-time
+  schemas:
+    Price:
+      type: object
+      required:
+        - price
+        - currency
+      properties:
+        productId:
+          type: integer
+          format: int64
+          minimum: 1
+        brandId:
+          type: integer
+          format: int32
+          minimum: 1
+        price:
+          type: number
+          format: float
+          minimum: 0
+        currency:
+          type: string
+          minLength: 3
+          maxLength: 3
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string

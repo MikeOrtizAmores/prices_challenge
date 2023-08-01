@@ -2,33 +2,50 @@ package com.ortizmiguelangel.action.query;
 
 public class GetProductPriceOnDateQuery {
 
-    private Integer tenantId;
+    private final Integer tenantId;
 
-    private Long productId;
+    private final Long productId;
 
-    private Long dateInMilis;
+    private final Long dateInMillis;
+
+    private GetProductPriceOnDateQuery(Builder builder) {
+        this.tenantId = builder.tenantId;
+        this.productId = builder.productId;
+        this.dateInMillis = builder.dateInMillis;
+    }
 
     public Integer getTenantId() {
         return tenantId;
-    }
-
-    public void setTenantId(Integer tenantId) {
-        this.tenantId = tenantId;
     }
 
     public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public Long getDateInMillis() {
+        return dateInMillis;
     }
 
-    public Long getDateInMilis() {
-        return dateInMilis;
-    }
+    public static class Builder {
 
-    public void setDateInMilis(Long dateInMilis) {
-        this.dateInMilis = dateInMilis;
+        private Integer tenantId = 1;
+
+        private final Long productId;
+
+        private final Long dateInMillis;
+
+        public Builder(Long productId, Long dateInMillis) {
+            this.productId = productId;
+            this.dateInMillis = dateInMillis;
+        }
+
+        public Builder setTenantId(Integer tenantId) {
+            this.tenantId = tenantId;
+            return this;
+        }
+
+        public GetProductPriceOnDateQuery build() {
+            return new GetProductPriceOnDateQuery(this);
+        }
     }
 }

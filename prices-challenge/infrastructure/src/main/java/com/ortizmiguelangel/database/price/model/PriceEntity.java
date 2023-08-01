@@ -1,7 +1,6 @@
 package com.ortizmiguelangel.database.price.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -13,6 +12,10 @@ import java.util.Objects;
 @Table(name = "PRICES")
 @Getter
 @Setter
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PriceEntity {
 
     @Id
