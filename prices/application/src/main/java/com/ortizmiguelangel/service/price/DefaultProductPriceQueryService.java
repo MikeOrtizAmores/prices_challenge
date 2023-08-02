@@ -9,6 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
 @Service
 @RequiredArgsConstructor
 public class DefaultProductPriceQueryService implements ProductPriceQueryService {
@@ -24,8 +28,8 @@ public class DefaultProductPriceQueryService implements ProductPriceQueryService
                 .switchIfEmpty(Mono.error(new PriceNotFoundException(
                         "Price for product " + getProductPriceOnDateQuery.getProductId() +
                                 " of brand " + getProductPriceOnDateQuery.getTenantId() +
-                                " and at " + getProductPriceOnDateQuery.getDateInMillis() +
-                                " timestamp could not be found")))
+                                " and at date " + OffsetDateTime.ofInstant(Instant.ofEpochMilli(getProductPriceOnDateQuery.getDateInMillis()), ZoneOffset.UTC) +
+                                " could not be found")))
                 .reduce(this::getProductPriceWithHigherPriority);
     }
 

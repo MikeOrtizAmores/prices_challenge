@@ -13,6 +13,7 @@
     <name>server</name>
 
     <dependencies>
+        <!-- Internal dependencies -->
         <dependency>
             <groupId>com.ortizmiguelangel</groupId>
             <artifactId>infrastructure</artifactId>
@@ -23,6 +24,8 @@
             <artifactId>interface</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <!-- Testing -->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite</artifactId>

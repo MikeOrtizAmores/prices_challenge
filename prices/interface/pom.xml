@@ -13,6 +13,7 @@
     <name>interface</name>
 
     <dependencies>
+        <!-- Internal dependencies -->
         <dependency>
             <groupId>com.ortizmiguelangel</groupId>
             <artifactId>domain</artifactId>
@@ -23,6 +24,30 @@
             <artifactId>application</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <!-- Starters -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <!-- OpenAPI & Swagger -->
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webflux-ui</artifactId>
+        </dependency>
+
+        <!-- MapStruct -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+        </dependency>
+
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -31,23 +56,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok-mapstruct-binding</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>jackson-databind-nullable</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-suite</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -55,59 +63,6 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>6.6.0</version>
-                <executions>
-                    <execution>
-                        <id>openapi-generate-query</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <generatorName>spring</generatorName>
-                            <inputSpec>${project.basedir}/src/main/resources/api/price-query-api.yml</inputSpec>
-                            <generatorName>spring</generatorName>
-                            <modelNameSuffix>DTO</modelNameSuffix>
-                            <library>spring-boot</library>
-                            <configOptions>
-                                <oas3>true</oas3>
-                                <useTags>true</useTags>
-                                <useSpringfox>false</useSpringfox>
-                                <reactive>true</reactive>
-                                <interfaceOnly>true</interfaceOnly>
-                                <dateLibrary>java8</dateLibrary>
-                                <packageName>com.ortizmiguelangel.generatedapi</packageName>
-                                <apiPackage>com.ortizmiguelangel.generatedapi.query</apiPackage>
-                                <modelPackage>com.ortizmiguelangel.generatedapi.query.model</modelPackage>
-                            </configOptions>
-                            <output>target/generated-sources</output>
-                        </configuration>
-                    </execution>
-                    <!--<execution>
-                        <id>openapi-generate-command</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <generatorName>spring</generatorName>
-                            <inputSpec>${project.basedir}/src/main/resources/api/price-command-api.yml</inputSpec>
-                            <generatorName>spring</generatorName>
-                            <modelNameSuffix>DTO</modelNameSuffix>
-                            <library>spring-boot</library>
-                            <configOptions>
-                                <oas3>true</oas3>
-                                <useSpringfox>false</useSpringfox>
-                                <additionalModelTypeAnnotations>
-                                    @lombok.Builder
-                                </additionalModelTypeAnnotations>
-                                <reactive>true</reactive>
-                                <interfaceOnly>true</interfaceOnly>
-                                <apiPackage>com.ortizmiguelangel.generatedapi.command</apiPackage>
-                                <modelPackage>com.ortizmiguelangel.generatedapi.command.model</modelPackage>
-                            </configOptions>
-                            <output>target/generated-sources</output>
-                        </configuration>
-                    </execution>-->
-                </executions>
             </plugin>
         </plugins>
     </build>

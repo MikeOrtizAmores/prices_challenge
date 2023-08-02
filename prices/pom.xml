@@ -61,21 +61,11 @@
                 <artifactId>jackson-databind-nullable</artifactId>
                 <version>${jackson-databind-nullable.version}</version>
             </dependency>
-            <!--<dependency>
-                <groupId>io.swagger.core.v3</groupId>
-                <artifactId>swagger-core</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>-->
-            <!--<dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-core</artifactId>
-                <version>${springfox.version}</version>
-            </dependency>
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
-                <version>${springfox.version}</version>
-            </dependency>-->
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-webflux-ui</artifactId>
+                <version>${openapi-ui.version}</version>
+            </dependency>
 
             <!-- MapStruct -->
             <dependency>
@@ -104,14 +94,10 @@
                 <version>${hibernate.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.h2database</groupId>
-                <artifactId>h2</artifactId>
-                <version>${h2.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>io.r2dbc</groupId>
                 <artifactId>r2dbc-h2</artifactId>
                 <version>${h2-react.version}</version>
+                <scope>runtime</scope>
             </dependency>
 
             <!-- Testing -->
@@ -149,38 +135,19 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-r2dbc</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-webflux-ui</artifactId>
-            <version>${openapi-ui.version}</version>
         </dependency>
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-            </plugin>
-        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -189,6 +156,11 @@
                     <configuration>
                         <skip>true</skip>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M5</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -217,6 +189,63 @@
                             <compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>
                         </compilerArgs>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.openapitools</groupId>
+                    <artifactId>openapi-generator-maven-plugin</artifactId>
+                    <version>6.6.0</version>
+                    <executions>
+                        <execution>
+                            <id>openapi-generate-query</id>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                            <configuration>
+                                <generatorName>spring</generatorName>
+                                <inputSpec>${project.basedir}/src/main/resources/api/price-query-api.yml</inputSpec>
+                                <generatorName>spring</generatorName>
+                                <modelNameSuffix>DTO</modelNameSuffix>
+                                <library>spring-boot</library>
+                                <configOptions>
+                                    <oas3>true</oas3>
+                                    <useTags>true</useTags>
+                                    <useSpringfox>false</useSpringfox>
+                                    <reactive>true</reactive>
+                                    <interfaceOnly>true</interfaceOnly>
+                                    <dateLibrary>java8</dateLibrary>
+                                    <packageName>com.ortizmiguelangel.generatedapi</packageName>
+                                    <apiPackage>com.ortizmiguelangel.generatedapi.query</apiPackage>
+                                    <modelPackage>com.ortizmiguelangel.generatedapi.query.model</modelPackage>
+                                </configOptions>
+                                <output>target/generated-sources</output>
+                            </configuration>
+                        </execution>
+                        <!--<execution>
+                            <id>openapi-generate-command</id>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                            <configuration>
+                                <generatorName>spring</generatorName>
+                                <inputSpec>${project.basedir}/src/main/resources/api/price-command-api.yml</inputSpec>
+                                <generatorName>spring</generatorName>
+                                <modelNameSuffix>DTO</modelNameSuffix>
+                                <library>spring-boot</library>
+                                <configOptions>
+                                    <oas3>true</oas3>
+                                    <useTags>true</useTags>
+                                    <useSpringfox>false</useSpringfox>
+                                    <reactive>true</reactive>
+                                    <interfaceOnly>true</interfaceOnly>
+                                    <dateLibrary>java8</dateLibrary>
+                                    <packageName>com.ortizmiguelangel.generatedapi</packageName>
+                                    <apiPackage>com.ortizmiguelangel.generatedapi.command</apiPackage>
+                                    <modelPackage>com.ortizmiguelangel.generatedapi.command.model</modelPackage>
+                                </configOptions>
+                                <output>target/generated-sources</output>
+                            </configuration>
+                        </execution>-->
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
