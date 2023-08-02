@@ -5,11 +5,5 @@ spring:
     url: r2dbc:h2:mem:///testdb
     username: sa
     password: password
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-      settings.trace: false
-      settings.web-allow-others: false
 springdoc:
   packages-to-scan: com.ortizmiguelangel.api
