@@ -15,6 +15,12 @@
 mvn clean package
 ```
 
+#### Run all the tests
+
+```script
+mvn clean test
+```
+
 #### Execute the application
 
 ```script
@@ -25,12 +31,6 @@ mvn spring-boot:run -Dspring.profiles.active=dev
 
 ```script
 mvn spring-boot:run -Dspring.profiles.active=dev -DskipTests
-```
-
-#### Run all the tests
-
-```script
-mvn clean test
 ```
 
 or, in the case you are using IntelliJ IDEA, the run configurations should be loaded automatically:
@@ -47,9 +47,9 @@ you can check is the application is running and consume the implemented endpoint
 * Spring Boot 2.7.14
 * OpenAPI 3
 * OpenAPI maven code generator
-* WebFlux (reactor)
+* WebFlux - Reactor
 * Cucumber 7
-* JUnit5
+* JUnit 5
 * MapStruct
 * Lombok
 
@@ -70,8 +70,8 @@ we achieve low coupling with our infrastructure and among the actions that shoul
 our database. Besides, this architecture facilitates the adherence to SOLID principles and many of the best practices
 guidelines.
 
-The design of the API has been made following the API-first principles. This way, we could negotiate a contract with
-the previously known consumers of the API, and every part can start coding with the knowledge of the endpoint paths and
+The API design has been made following the API-first principles. This way, we could negotiate a contract with the
+previously known consumers of the API, and every part can start coding with the knowledge of the endpoint paths and
 the models each endpoint is going to receive and return.
 
 ### Possible future improvements
