@@ -11,6 +11,9 @@
 
 #### Compile sources
 
+In order to be able to execute these commands you must have maven installed. If you already have it, you must open a
+terminal and lead to the path `./prices` relative to the project root.
+
 ```script
 mvn clean package
 ```
@@ -73,6 +76,11 @@ guidelines.
 The API design has been made following the API-first principles. This way, we could negotiate a contract with the
 previously known consumers of the API, and every part can start coding with the knowledge of the endpoint paths and
 the models each endpoint is going to receive and return.
+
+A multi-module maven archetype has been used to generate the project structure. Personally, I like this approach better
+than single-module, because it establish certain constraints on the models and components you can use in each layer of
+the project. This becomes specially useful when you are working in a team whose members are not totally used to the
+architecture you have to work with.
 
 ### Possible future improvements
 
